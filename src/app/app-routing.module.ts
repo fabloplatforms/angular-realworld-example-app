@@ -1,33 +1,25 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [
-  {
-    path: 'settings',
-    loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule)
-  },
-  {
-    path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
-  },
-  {
-    path: 'editor',
-    loadChildren: () => import('./editor/editor.module').then(m => m.EditorModule)
-  },
-  {
-    path: 'article',
-    loadChildren: () => import('./article/article.module').then(m => m.ArticleModule)
-  }
-];
+import { VisitorsListComponent } from './visitors-list/visitors-list.component';
+import { InvestersListComponent } from './investers-list/investers-list.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
+const routes: Routes = [{
+  path: 'VisitorsList',
+  component: VisitorsListComponent
+},
+{
+  path: 'InvestersList',
+  component: InvestersListComponent
+},
+{
+  path: '**',
+  component:PageNotFoundComponent
+}];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    // preload all modules; optionally we could
-    // implement a custom preloading strategy for just some
-    // of the modules (PRs welcome 😉)
-    preloadingStrategy: PreloadAllModules,
-    relativeLinkResolution: 'legacy'
-})],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
